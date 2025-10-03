@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Supply Emporium</title>
+    <title>Art Attack!</title>
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.4/dist/jsQR.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
@@ -430,6 +430,7 @@
     <div id="new-game-screen" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-3000">
         <div class="relative bg-amber-100 w-full max-w-2xl p-6 rounded-lg shadow-xl border-4 border-amber-900 text-amber-900 flex flex-col">
             <button id="close-new-game-screen" class="absolute top-2 right-2 text-3xl font-bold text-amber-900 hover:text-red-700">&times;</button>
+            <h1 class="text-5xl font-handwritten text-center mb-4">Art Attack!</h1>
             <h2 class="text-3xl font-handwritten text-center mb-6">Start a New Game</h2>
             <div class="space-y-4">
                 <button id="new-game-standard" class="btn-style p-4 text-xl w-full">Standard Unlocks</button>
@@ -8411,7 +8412,7 @@ function openProductAssignmentForShelf(shelf, slotIndex) {
 
 
             // 2. Reset everything
-            localStorage.removeItem('artEmporiumSave');
+            localStorage.removeItem('artAttackSave');
             resetGameState();
 
             // 3. Apply options from the config object
@@ -8542,11 +8543,11 @@ function openProductAssignmentForShelf(shelf, slotIndex) {
                 marketForecast,
                 nextMarketForecast
             };
-            localStorage.setItem('artEmporiumSave', JSON.stringify(gameState));
+            localStorage.setItem('artAttackSave', JSON.stringify(gameState));
         }
 
         function loadGame() {
-            const savedState = localStorage.getItem('artEmporiumSave');
+            const savedState = localStorage.getItem('artAttackSave');
             if (savedState) {
                 try {
                     const gameState = JSON.parse(savedState);
@@ -8619,7 +8620,7 @@ function openProductAssignmentForShelf(shelf, slotIndex) {
 
                 } catch (e) {
                     console.error("Failed to parse saved game data:", e);
-                    localStorage.removeItem('artEmporiumSave'); // Clear corrupted save
+                    localStorage.removeItem('artAttackSave'); // Clear corrupted save
                 }
             }
         }
@@ -8719,7 +8720,7 @@ function openProductAssignmentForShelf(shelf, slotIndex) {
             // document.getElementById('companion-connect-btn').addEventListener('click', () => connectToHost());
 
 
-            const hasSave = localStorage.getItem('artEmporiumSave');
+            const hasSave = localStorage.getItem('artAttackSave');
             if (hasSave) {
                 loadGame();
             } else {
@@ -8775,7 +8776,7 @@ function openProductAssignmentForShelf(shelf, slotIndex) {
                 showScreen('casual-mode-screen');
             });
              document.getElementById('close-new-game-screen').addEventListener('click', () => {
-                if (localStorage.getItem('artEmporiumSave')) {
+                if (localStorage.getItem('artAttackSave')) {
                     hideScreen('new-game-screen');
                 } else {
                     // If closing with no save, start a default game immediately.

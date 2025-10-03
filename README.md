@@ -1,4 +1,4 @@
-# Art Attack!)
+# Art Attack!
 
 Welcome to Art Attack! You are the new manager of a local corner shop. Your job is to keep the shelves stocked, read the market, and turn a tidy profit. Can you grow your humble shop into a local empire by mastering the daily ebb and flow of supply and demand?
 
