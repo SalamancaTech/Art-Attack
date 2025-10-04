@@ -2064,7 +2064,9 @@
                     case 'waitingForCoffee':
                         this.stateTimer -= deltaTime;
                         const playerIsServing = isPlayerInZone(coffeeShop.behindCounterZone);
-                        const baristaIsServing = unlocks.employees.barista && !barista.onBreak && Math.hypot(barista.x - barista.idleX, barista.y - barista.idleY) < 10;
+                        const currentShiftPhase = dayPhase.replace('-', ' ');
+                        const baristaOnShift = barista.shift.map(s => s.toLowerCase()).includes(currentShiftPhase.toLowerCase());
+                        const baristaIsServing = unlocks.employees.barista && !barista.onBreak && baristaOnShift && Math.hypot(barista.x - barista.idleX, barista.y - barista.idleY) < 15;
 
                         if (this.coffeeOrder && (playerIsServing || baristaIsServing)) {
                             this.coffeeOrder.ingredients.forEach(ingredient => {
@@ -4424,8 +4426,8 @@
 
                     setTimeout(() => {
                         isMandatoryBreak = false;
-                        employeesOnLastBreak.forEach(employee => {
-                            if (!employee.playerInitiatedBreak) {
+                        employeesOnFirstBreak.forEach(employee => { // <--- Corrected variable
+                             if (!employee.playerInitiatedBreak) {
                                 employee.onBreak = false;
                             }
                         });
@@ -5457,6 +5459,14 @@ function showHint() {
             dayPhase = 'pre-open';
             dayShiftBreakTriggered = false;
             nightShiftBreakTriggered = false;
+            const allEmployees = { cashier, stocker, barista, manager, salesperson };
+            for (const empKey in allEmployees) {
+                const employee = allEmployees[empKey];
+                if (employee) {
+                    employee.breakTakenToday = false;
+                    employee.playerInitiatedBreak = false;
+                }
+            }
             manager.hasPlacedMorningOrder = false; // Reset for the next day
 
             // --- Daily & Weekly Expense Calculation ---
@@ -5997,8 +6007,8 @@ function showHint() {
                 manager.y = manager.idleY;
             }
 
-            barista.idleX = coffeeShop.rect.x + (coffeeShop.rect.w / 4) + 42; // Move to the right
-            barista.idleY = coffeeShop.rect.y + coffeeShop.rect.h + 5 - 42; // Move up
+            barista.idleX = coffeeShop.rect.x + coffeeShop.rect.w / 2;
+            barista.idleY = coffeeShop.rect.y + coffeeShop.rect.h * 0.65;
             if (barista.state === 'idle' && !barista.task) {
                 barista.x = barista.idleX;
                 barista.y = barista.idleY;
