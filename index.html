@@ -2079,6 +2079,7 @@
                             }
 
                             cash += this.coffeeOrder.price;
+                            updateUI();
                             this.boughtCoffee = true;
 
                             let floatingText = `${this.coffeeOrder.name}! +$${this.coffeeOrder.price.toFixed(2)}`;
