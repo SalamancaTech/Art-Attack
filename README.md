@@ -1,4 +1,4 @@
-# ![][[image1](https://raw.githubusercontent.com/SalamancaTech/Art-Attack/refs/heads/main/AA-officialLOGO1.png)]
+# ![Art Attack Official Logo](https://raw.githubusercontent.com/SalamancaTech/Art-Attack/refs/heads/main/AA-officialLOGO1.png)
 
 # Art Attack\! 
 
